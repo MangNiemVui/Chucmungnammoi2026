@@ -1,0 +1,2314 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Thiệp Năm Mới 🎆</title>
+
+  <style>
+    .successPage{
+      position:fixed; inset:0;
+      display:grid; place-items:center;
+      padding:18px;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 99999;
+    }
+    .successCard{
+      width:min(520px, 92vw);
+      border-radius: 22px;
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 55px rgba(28,34,64,.20);
+      padding: 18px 16px;
+      text-align:center;
+    }
+    .successTick{
+      width: 92px; height: 92px;
+      border-radius: 999px;
+      margin: 4px auto 12px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(255,122,182,.35), rgba(126,231,255,.35));
+      border: 1px solid rgba(28,34,64,.10);
+      box-shadow: 0 14px 30px rgba(255,122,182,.14);
+    }
+    .successTick span{ font-size: 52px; line-height: 1; }
+    .successTitle{ font-weight: 950; font-size: 18px; margin: 0 0 8px; }
+    .successText{
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(28,34,64,.78);
+      margin: 0 0 14px;
+      white-space: pre-wrap;
+    }
+
+    :root{
+      --bg1:#ffe6f2; --bg2:#e8fbff; --bg3:#fff7da;
+      --ink:#1c2240; --muted: rgba(28,34,64,.72);
+      --card: rgba(255,255,255,.72); --card2: rgba(255,255,255,.55);
+      --stroke: rgba(28,34,64,.10); --shadow: 0 18px 50px rgba(28,34,64,.14);
+      --accent:#ff7ab6; --accent2:#7ee7ff; --danger:#ff4d6d;
+      --radius: 24px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; overflow:hidden;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 800px at 18% 18%, rgba(255,122,182,.22), transparent 60%),
+        radial-gradient(1000px 700px at 80% 25%, rgba(126,231,255,.22), transparent 58%),
+        radial-gradient(900px 700px at 65% 85%, rgba(255,231,153,.25), transparent 58%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+    }
+
+    canvas#fx{position:fixed; inset:0; width:100vw; height:100vh; display:block; pointer-events:none;}
+    .sparkles{
+      position:fixed; inset:0;
+      background:
+        radial-gradient(1.5px 1.5px at 22% 30%, rgba(255,255,255,.9) 40%, transparent 45%),
+        radial-gradient(1.2px 1.2px at 62% 12%, rgba(255,255,255,.9) 40%, transparent 45%),
+        radial-gradient(1.6px 1.6px at 82% 52%, rgba(255,255,255,.9) 40%, transparent 45%),
+        radial-gradient(1.1px 1.1px at 35% 75%, rgba(255,255,255,.85) 40%, transparent 45%),
+        radial-gradient(1.3px 1.3px at 12% 62%, rgba(255,255,255,.85) 40%, transparent 45%);
+      opacity:.75; pointer-events:none; filter: blur(.15px); mix-blend-mode: soft-light;
+    }
+
+    .wrap{position:fixed; inset:0; display:grid; place-items:center; padding:12px;}
+    .card{
+      width:min(920px, 100%);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      overflow:hidden;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      max-height: calc(100svh - 24px);
+    }
+
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px 16px;
+      background: linear-gradient(90deg, rgba(255,122,182,.35), rgba(126,231,255,.30));
+      border-bottom: 1px solid rgba(28,34,64,.10);
+      flex-wrap:wrap;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:800; letter-spacing:.2px; font-size:14px;
+      padding:8px 12px; border-radius:999px;
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(28,34,64,.10);
+      white-space:nowrap;
+    }
+    .actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px; border-radius:999px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(28,34,64,.10);
+      font-size:12px; color: rgba(28,34,64,.80);
+      user-select:none; white-space:nowrap;
+    }
+    .btnMusic{
+      padding: 8px 12px; border-radius:999px; border:0; cursor:pointer;
+      font-weight:900; color:#fff;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 22px rgba(255,122,182,.18);
+      transition: transform .12s ease, filter .12s ease;
+      white-space:nowrap;
+    }
+    .btnMusic:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    .btnMusic:active{ transform: translateY(0px) scale(.99); }
+
+    .btnSecondary{
+      padding: 8px 12px;
+      border-radius:999px;
+      border: 1px solid rgba(28,34,64,.12);
+      background: rgba(255,255,255,.65);
+      color: rgba(28,34,64,.85);
+      box-shadow:none;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .ownerBtn{
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .musicSelect{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(28,34,64,.10);
+      background: rgba(255,255,255,.65);
+      color: rgba(28,34,64,.85);
+      font-weight: 800;
+      font-size: 12px;
+      outline: none;
+      max-width: 220px;
+    }
+
+    .content{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      padding:14px;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      flex:1 1 auto;
+    }
+    @media (min-width: 780px){
+      .content{grid-template-columns: 1.05fr .95fr; align-items:center; gap:18px;}
+    }
+
+    h1{margin:6px 0; line-height:1.05; font-size: clamp(26px, 5vw, 44px);}
+    .sub{margin: 0 0 14px; color: var(--muted); font-size: clamp(14px, 2.6vw, 16px); line-height: 1.5;}
+
+    .wishBox{
+      padding:14px; border-radius:18px;
+      background: rgba(255,255,255,.60);
+      border: 1px solid rgba(28,34,64,.10);
+    }
+    .wish{font-size: clamp(15px, 3.2vw, 18px); line-height: 1.5; margin:0; min-height:56px;}
+    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    input{
+      flex:1 1 160px; min-width:160px;
+      padding:12px 12px; border-radius:14px;
+      border: 1px solid rgba(28,34,64,.14);
+      background: rgba(255,255,255,.75);
+      color: var(--ink); outline:none;
+    }
+    input::placeholder{color: rgba(28,34,64,.55)}
+    input:disabled{opacity:.6; cursor:not-allowed;}
+    button{
+      padding:12px 14px; border-radius:14px; border:0; cursor:pointer;
+      font-weight:900; color:#fff;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 25px rgba(255,122,182,.18);
+      transition: transform .12s ease, filter .12s ease;
+      white-space:nowrap;
+    }
+    button:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    button:active{ transform: translateY(0px) scale(.99); }
+    button:disabled{opacity:.55; cursor:not-allowed; transform:none; filter:none;}
+
+    .side{display:flex; align-items:center; justify-content:center; padding:6px 0 0;}
+    .bubble{
+      width: min(340px, 82vw); aspect-ratio: 1/1;
+      border-radius:24px;
+      background: radial-gradient(220px 220px at 30% 30%, rgba(255,122,182,.20), rgba(255,255,255,.35));
+      border: 1px solid rgba(28,34,64,.10);
+      display:grid; place-items:center;
+      position:relative; overflow:hidden;
+    }
+    .blob{
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(126,231,255,.28), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(255,122,182,.24), transparent 40%),
+        radial-gradient(circle at 60% 20%, rgba(255,231,153,.25), transparent 45%);
+      filter: blur(14px);
+      animation: floaty 5s ease-in-out infinite;
+    }
+    @keyframes floaty{0%,100%{transform:translate(-2%,-1%) rotate(-2deg)} 50%{transform:translate(2%,1%) rotate(2deg)}}
+    .avatarImg{
+      position: relative;
+      width: 78%; height: 78%;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 1px solid rgba(28,34,64,.10);
+      box-shadow: 0 10px 25px rgba(28,34,64,.10);
+      background: rgba(255,255,255,.75);
+    }
+
+    .foot{
+      padding: 0 18px 16px;
+      color: rgba(28,34,64,.68);
+      font-size: 12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .toggle{display:inline-flex; align-items:center; gap:8px; user-select:none; white-space:nowrap;}
+    .toggle input{ width: 18px; height: 18px; }
+    .year{
+      font-weight: 950;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* LOCK */
+    .lock{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      padding:18px;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(28,34,64,.10);
+      z-index: 20;
+    }
+    .lockPanel{
+      width: min(620px, 100%);
+      border-radius: 20px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 50px rgba(28,34,64,.16);
+      padding: 16px;
+      max-height: calc(100svh - 56px);
+      overflow:auto;
+    }
+    .lockTitle{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:10px; flex-wrap:wrap; margin-bottom:8px;
+    }
+    .lockTitle h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+      line-height:1.2;
+      word-break: break-word;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px; border-radius:999px;
+      border: 1px solid rgba(28,34,64,.12);
+      background: rgba(255,255,255,.65);
+      font-size: 12px; color: rgba(28,34,64,.75);
+      white-space:nowrap;
+    }
+    .mini{font-size:12px; color: rgba(28,34,64,.68); line-height:1.45; margin:0 0 10px;}
+    .status{
+      margin-top:10px;
+      padding:10px 12px; border-radius:14px;
+      border: 1px solid rgba(28,34,64,.12);
+      background: rgba(255,255,255,.72);
+      font-size: 13px; color: rgba(28,34,64,.85);
+      min-height: 42px; display:flex; align-items:center; gap:10px;
+    }
+    .status.bad{
+      border-color: rgba(255,77,109,.35);
+      background: rgba(255,77,109,.08);
+      color: rgba(155, 20, 55, .95);
+    }
+    .row2{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+    .btnDanger{background: linear-gradient(90deg, var(--danger), #ff9a7a);}
+
+    .selectWrap{position:relative; flex: 1 1 280px; min-width:260px;}
+    .selectBtn{
+      width:100%;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      border: 1px solid rgba(28,34,64,.14);
+      background: rgba(255,255,255,.75);
+      color: var(--ink);
+      cursor:pointer;
+      font-weight:700;
+    }
+    .selectBtn small{font-weight:600; color: rgba(28,34,64,.55)}
+    .menu{
+      position:absolute;
+      top: calc(100% + 8px);
+      left:0; right:0;
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 40px rgba(28,34,64,.18);
+      overflow:hidden;
+      z-index: 50;
+    }
+    .menuHead{padding:10px; border-bottom: 1px solid rgba(28,34,64,.10); background: rgba(255,255,255,.85);}
+    .menuList{max-height: 260px; overflow:auto;}
+    .item{
+      padding: 10px 12px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      cursor:pointer;
+    }
+    .item:hover{ background: rgba(126,231,255,.18); }
+    .item .left{display:flex; flex-direction:column; gap:2px;}
+    .item .name{font-weight:800;}
+    .item .meta{font-size:12px; color: rgba(28,34,64,.62);}
+    .item .tag{
+      font-size: 11px; font-weight:800;
+      padding: 6px 8px; border-radius:999px;
+      border: 1px solid rgba(28,34,64,.10);
+      background: rgba(255,255,255,.8);
+      color: rgba(28,34,64,.78);
+      white-space:nowrap;
+    }
+    .hidden{display:none !important;}
+
+    /* Wish send */
+    .wishSend{margin-top:14px;padding:12px;border:1px solid rgba(28,34,64,.10);border-radius:16px;background:rgba(255,255,255,.70)}
+    .wishSendHead{font-weight:800;margin-bottom:8px}
+    .wishSend textarea{width:100%;resize:vertical;min-height:88px;border-radius:14px;border:1px solid rgba(28,34,64,.16);padding:10px 12px;font:inherit;outline:none}
+    .wishSend textarea:focus{border-color:rgba(255,122,182,.65);box-shadow:0 0 0 4px rgba(255,122,182,.18)}
+    .muted{opacity:.75}
+
+    /* Owner modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9999}
+    .modal.hidden{display:none}
+    .modalCard{width:min(980px,100%);max-height:82vh;overflow:auto;background:#fff;border-radius:20px;padding:14px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
+    .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .modalTitle{font-weight:900;font-size:16px}
+    .modalBtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .modalBody{font-size:14px;line-height:1.45}
+    .ownerRow{border:1px solid rgba(28,34,64,.10);border-radius:16px;padding:10px 12px;margin:10px 0}
+    .ownerMeta{opacity:.78;font-size:12px;margin-bottom:6px}
+    .pillMini{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(126,231,255,.25);border:1px solid rgba(126,231,255,.45);font-size:12px}
+
+    /* Tap audio overlay */
+    .tapAudio{
+      position:fixed; inset:0;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 999;
+      padding: 18px;
+    }
+    .tapCard{
+      width: min(420px, 92vw);
+      border-radius: 20px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 50px rgba(28,34,64,.18);
+      padding: 16px;
+      text-align:center;
+    }
+    .tapTitle{font-weight:950; font-size:18px; margin-bottom:6px;}
+    .tapSub{font-size:13px; color: rgba(28,34,64,.72); line-height:1.45; margin-bottom:12px;}
+    .tapBtn{
+      display:inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color:#fff;
+      font-weight:950;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 25px rgba(255,122,182,.18);
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 520px){
+      .wrap{padding:0; place-items:stretch;}
+      .card{width:100%; max-height:100svh; border-radius:0;}
+      .topbar{padding:10px 12px;}
+      .badge{font-size:12px}
+      .pill{display:none}
+      .side{order:-1; padding:4px 0 0;}
+      .bubble{width: min(240px, 70vw); border-radius:20px;}
+      .avatarImg{width:84%; height:84%;}
+
+      .actions{
+        display:grid;
+        grid-template-columns: 1fr auto auto auto;
+        gap:8px;
+        align-items:center;
+        width:100%;
+      }
+      .musicSelect{
+        width:100%;
+        min-width:0;
+        max-width:none;
+        height:36px;
+        font-size:13px;
+        padding:8px 10px;
+      }
+      .btnMusic{
+        width:36px;
+        height:36px;
+        padding:0;
+        border-radius:12px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        font-size:16px;
+      }
+      .btnMusic .txt{display:none;}
+      .ownerBtn{grid-column: 1 / -1; height:36px;}
+
+      .row input, .row button, #btnWish{width:100%; flex: 1 1 100%;}
+      textarea#wishMsg{min-height:96px}
+
+      .lockPanel{max-height: calc(100svh - 24px);}
+      .lockTitle h2{font-size:16px;}
+      .row2 > *{width:100%; flex: 1 1 100%;}
+      .selectWrap{min-width:0;}
+    }
+
+    /* iOS safe area */
+    @supports (padding: max(0px)) {
+      .wrap{
+        padding: max(0px, env(safe-area-inset-top))
+                 max(0px, env(safe-area-inset-right))
+                 max(0px, env(safe-area-inset-bottom))
+                 max(0px, env(safe-area-inset-left));
+      }
+      @media (max-width: 520px){
+        .wrap{padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;}
+      }
+    }
+  
+
+    /* === TET THEME OVERRIDES === */
+    :root{
+      --bg1:#2b0000;
+      --bg2:#5a0000;
+      --bg3:#7a0b0b;
+
+      --ink:#fff6dc;
+      --muted: rgba(255,246,220,.72);
+
+      --card: rgba(28,6,6,.62);
+      --card2: rgba(28,6,6,.48);
+      --stroke: rgba(255,210,90,.28);
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+
+      --accent:#ffd26a;  /* gold */
+      --accent2:#ff5252; /* red */
+      --danger:#ff4d6d;
+
+      --radius: 24px;
+    }
+    body{
+      overflow:hidden;
+      background:
+        url("./image/bgr.jpg") center/cover no-repeat fixed,
+        radial-gradient(1100px 700px at 18% 18%, rgba(255,210,90,.10), transparent 60%),
+        radial-gradient(1000px 700px at 80% 25%, rgba(255,82,82,.12), transparent 58%),
+        radial-gradient(900px 700px at 65% 85%, rgba(255,210,90,.10), transparent 58%),
+        linear-gradient(135deg, var(--bg2), var(--bg1));
+      color: var(--ink);
+    }
+    .sparkles{ opacity:.35; mix-blend-mode: screen; }
+
+    .topbar{
+      background: linear-gradient(90deg, rgba(255,82,82,.22), rgba(255,210,90,.18));
+      border-bottom: 1px solid rgba(255,210,90,.22);
+    }
+    .badge{
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,210,90,.28);
+      color: var(--ink);
+    }
+    .pill{
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,210,90,.18);
+      color: rgba(255,246,220,.85);
+    }
+    .card{
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid rgba(255,210,90,.25);
+    }
+    h1{ letter-spacing:.2px; }
+    .year{ color: var(--accent); text-shadow: 0 10px 25px rgba(255,210,90,.15); }
+
+    input, textarea, .musicSelect{
+      background: rgba(0,0,0,.16) !important;
+      color: var(--ink) !important;
+      border: 1px solid rgba(255,210,90,.22) !important;
+    }
+    input::placeholder, textarea::placeholder{ color: rgba(255,246,220,.55); }
+    .btnSecondary{
+      background: rgba(0,0,0,.14);
+      border: 1px solid rgba(255,210,90,.22);
+      color: var(--ink);
+    }
+    button, #btnUnlock{
+      box-shadow: 0 14px 30px rgba(0,0,0,.25);
+    }
+
+    /* Countdown */
+    .countdown{
+      display:flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,210,90,.22);
+      box-shadow: 0 14px 30px rgba(0,0,0,.18);
+      font-weight: 900;
+      letter-spacing:.2px;
+      flex-wrap:wrap;
+    }
+    .cdItem{ display:flex; align-items:baseline; gap:6px; }
+    .cdVal{ font-variant-numeric: tabular-nums; font-size: 14px; }
+    .cdSep{ opacity:.6; }
+
+    /* Lanterns + petals */
+    .tetDecor{ position:fixed; inset:0; pointer-events:none; z-index:2; }
+    .lantern{
+      position:absolute; top:12px;
+      width: 62px; height: 84px;
+      border-radius: 18px;
+      background:
+        radial-gradient(30px 30px at 30% 25%, rgba(255,255,255,.35), transparent 55%),
+        linear-gradient(180deg, rgba(255,82,82,.96), rgba(170,0,0,.96));
+      border: 1px solid rgba(255,210,90,.35);
+      box-shadow: 0 18px 45px rgba(0,0,0,.35), 0 0 28px rgba(255,210,90,.18);
+      animation: floatLantern 5.6s ease-in-out infinite;
+    }
+    .lantern::before{
+      content:"";
+      position:absolute; left:50%; top:-10px; transform:translateX(-50%);
+      width: 42px; height: 14px; border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255,210,90,.95), rgba(170,120,0,.95));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .lantern::after{
+      content:"";
+      position:absolute; left:50%; bottom:-26px; transform:translateX(-50%);
+      width: 2px; height: 26px;
+      background: rgba(255,210,90,.85);
+      box-shadow: 0 0 18px rgba(255,210,90,.25);
+    }
+    .lantern--l{ left: 12px; transform-origin: top center; }
+    .lantern--r{ right: 12px; animation-delay: -1.8s; }
+    .lantern--c{ left: 50%; transform: translateX(-50%); top: -6px; width: 54px; height: 74px; opacity:.85; animation-delay:-3.2s; }
+
+    @keyframes floatLantern{
+      0%,100%{ transform: translateY(0) rotate(-2deg); }
+      50%{ transform: translateY(10px) rotate(2deg); }
+    }
+
+    .petalLayer{ position:absolute; inset:0; overflow:hidden; }
+    .petal{
+      position:absolute;
+      width: 10px; height: 14px;
+      background: radial-gradient(10px 10px at 30% 30%, rgba(255,255,255,.75), rgba(255,182,193,.95));
+      border-radius: 10px 10px 10px 0;
+      transform: rotate(25deg);
+      opacity:.9;
+      filter: blur(.2px);
+      animation: fallPetal linear infinite;
+    }
+    @keyframes fallPetal{
+      0%{ transform: translate3d(0,-20px,0) rotate(0deg); opacity: 0; }
+      10%{ opacity: .85; }
+      100%{ transform: translate3d(-60px, 110vh, 0) rotate(320deg); opacity: 0; }
+    }
+
+    /* Intro overlay */
+    .introOverlay{
+      position:fixed; inset:0; z-index: 99998;
+      display:grid; place-items:center;
+      padding: 16px;
+      background: radial-gradient(900px 600px at 50% 15%, rgba(255,210,90,.10), transparent 55%),
+                  rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .introCard{
+      width: min(980px, 96vw);
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(55,8,8,.95), rgba(25,5,5,.92));
+      border: 1px solid rgba(255,210,90,.35);
+      box-shadow: 0 28px 80px rgba(0,0,0,.55);
+      padding: 16px 16px 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .introCard::before{
+      content:"";
+      position:absolute; inset:-40px;
+      background:
+        radial-gradient(520px 220px at 20% 0%, rgba(255,82,82,.22), transparent 60%),
+        radial-gradient(520px 220px at 80% 0%, rgba(255,210,90,.20), transparent 60%);
+      pointer-events:none;
+      filter: blur(12px);
+      opacity:.9;
+    }
+    .introTop{ position:relative; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .introTitle{
+      font-weight: 1000;
+      font-size: clamp(18px, 3.2vw, 28px);
+      letter-spacing:.3px;
+    }
+    .introYear{ color: var(--accent); }
+    .introClose{
+      width: 42px; height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,210,90,.30);
+      background: rgba(0,0,0,.18);
+      color: var(--ink);
+      cursor:pointer;
+    }
+    .introCountdown{
+      position:relative;
+      display:flex; gap:10px;
+      justify-content:center;
+      margin: 14px 0 12px;
+      flex-wrap:wrap;
+    }
+    .cdBox{
+      width: 92px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,210,90,.25);
+      border-radius: 18px;
+      padding: 10px 10px 8px;
+      text-align:center;
+      box-shadow: 0 16px 36px rgba(0,0,0,.28);
+    }
+    .cdNum{ font-size: 26px; font-weight: 1000; font-variant-numeric: tabular-nums; color: var(--accent); }
+    .cdLbl{ font-size: 12px; opacity: .85; letter-spacing:.6px; }
+
+    .introHero{ position:relative; display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; align-items:center; }
+    .introHello{ font-size: 18px; font-weight: 950; margin-bottom: 6px; }
+    .introSub{ line-height:1.55; opacity:.92; }
+    .introHint{ margin-top: 10px; opacity:.75; }
+    .introArt{ display:grid; place-items:center; }
+    .horseImg{ width:min(420px, 70vw); max-height: 280px; animation: horseFloat 4.8s ease-in-out infinite; }
+    @keyframes horseFloat{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(10px); } }
+
+    .introActions{ position:relative; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 10px; }
+
+    /* Tet flow modals */
+    .tetModalCard{
+      border: 1px solid rgba(255,210,90,.32);
+      background: linear-gradient(180deg, rgba(55,8,8,.96), rgba(25,5,5,.92));
+      color: var(--ink);
+    }
+    .tetNote{
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,210,90,.22);
+      border-radius: 16px;
+      padding: 10px 12px;
+      line-height:1.55;
+      margin-bottom: 12px;
+      color: rgba(255,246,220,.88);
+    }
+    .formGrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .field span{ display:block; font-weight: 900; margin-bottom: 6px; opacity:.92; }
+    .field input{ width:100%; }
+
+    .wheelWrap{ display:grid; place-items:center; padding: 10px 0 14px; }
+    .wheel{
+      width: min(320px, 78vw);
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      border: 10px solid rgba(255,210,90,.35);
+      box-shadow: 0 22px 60px rgba(0,0,0,.45);
+      background: rgba(0,0,0,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .wheelInner{
+      position:absolute; inset:0;
+      border-radius: 999px;
+      background: conic-gradient(
+        rgba(255,210,90,.98) 0deg 50deg,
+        rgba(255,82,82,.95) 50deg 170deg,
+        rgba(0,0,0,.30) 170deg 360deg
+      );
+      transform: rotate(0deg);
+      transition: transform 3.8s cubic-bezier(.12,.9,.14,1);
+    }
+    .wheelPointer{
+      width: 0; height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-bottom: 26px solid rgba(255,210,90,.95);
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,.45));
+      margin-bottom: 10px;
+    }
+    .wheelActions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .wheelResult{ text-align:center; margin-top: 10px; min-height: 38px; line-height:1.5; }
+
+    .fortuneBox{
+      user-select:none;
+      height: 180px;
+      border-radius: 22px;
+      border: 1px dashed rgba(255,210,90,.35);
+      background: rgba(0,0,0,.16);
+      display:grid; place-items:center;
+      position:relative;
+      overflow:hidden;
+      cursor:pointer;
+    }
+    .fortuneBox:focus{ outline: 2px solid rgba(255,210,90,.35); outline-offset: 4px; }
+    .fortuneStick{
+      position:absolute;
+      width: 14px; height: 120px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255,210,90,.95), rgba(170,120,0,.95));
+      opacity:.85;
+    }
+    .fortuneStick:nth-child(1){ left: 42%; transform: rotate(-10deg); }
+    .fortuneStick:nth-child(2){ left: 50%; transform: rotate(12deg); opacity:.95; }
+    .fortuneStick:nth-child(3){ left: 58%; transform: rotate(-2deg); opacity:.78; }
+    .fortuneTap{ position:relative; font-weight: 1000; opacity:.9; }
+    .fortuneBox.shaking{ animation: shake 0.6s ease-in-out infinite; }
+    @keyframes shake{
+      0%,100%{ transform: rotate(0deg); }
+      20%{ transform: rotate(-2deg); }
+      40%{ transform: rotate(2deg); }
+      60%{ transform: rotate(-1.5deg); }
+      80%{ transform: rotate(1.5deg); }
+    }
+    .fortuneResult{ margin-top: 12px; text-align:center; }
+    .fortuneMoney{ font-size: 34px; font-weight: 1000; color: var(--accent); }
+    .fortuneWish{ margin-top: 8px; line-height:1.6; opacity:.95; }
+
+
+</style>
+</head>
+
+<body>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="sparkles" aria-hidden="true"></div>
+
+
+  <!-- Tết decor layers -->
+  <div class="tetDecor" aria-hidden="true">
+    <div class="lantern lantern--l"></div>
+    <div class="lantern lantern--r"></div>
+    <div class="lantern lantern--c"></div>
+    <div id="petalLayer" class="petalLayer"></div>
+  </div>
+
+  <!-- Intro overlay (hiện sau khi mở thiệp) -->
+  <div id="introOverlay" class="introOverlay hidden" role="dialog" aria-modal="true" aria-label="Màn hình chúc mừng">
+    <div class="introCard">
+      <div class="introTop">
+        <div class="introTitle">Chúc Mừng Năm Mới <span class="introYear">2026</span></div>
+        <button class="introClose" id="btnIntroClose" type="button" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="introCountdown" aria-label="Đếm ngược đến Tết">
+        <div class="cdBox"><div class="cdNum" id="introDays">--</div><div class="cdLbl">NGÀY</div></div>
+        <div class="cdBox"><div class="cdNum" id="introHours">--</div><div class="cdLbl">GIỜ</div></div>
+        <div class="cdBox"><div class="cdNum" id="introMins">--</div><div class="cdLbl">PHÚT</div></div>
+        <div class="cdBox"><div class="cdNum" id="introSecs">--</div><div class="cdLbl">GIÂY</div></div>
+      </div>
+
+      <div class="introHero">
+        <div class="introText">
+          <div class="introHello" id="introHello">✨ Chào bạn ✨</div>
+          <div class="introSub">Mong bạn một năm mới <b>an khang</b>, <b>thịnh vượng</b>, vạn sự như ý.</div>
+          <div class="introHint">Chạm “Vào thiệp” để xem lời chúc dành riêng cho bạn.</div>
+        </div>
+        <div class="introArt">
+          <img class="horseImg" src="./assets/horse.svg" alt="Ngựa năm 2026" />
+        </div>
+      </div>
+
+      <div class="introActions">
+        <button class="btn" id="btnIntroContinue" type="button">Vào thiệp 🎆</button>
+        <button class="btnSecondary" id="btnTetGame" type="button">Nhận lộc đầu năm 🎁</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="wrap">
+    <div class="card">
+
+      <div class="lock" id="lock">
+        <div class="lockPanel">
+          <div class="lockTitle">
+            <h2>🔒 Mở thiệp bằng TÊN + MẬT KHẨU</h2>
+            <span class="chip" id="chip">Chưa mở</span>
+          </div>
+
+          <p class="mini">
+            Chọn người cần xem, nhập mật khẩu rồi bấm <b>Mở thiệp</b>.
+            Nếu bạn đăng nhập <b>Owner</b>, bạn có thể xem thiệp của người khác mà không cần mật khẩu của họ.
+          </p>
+
+          <div class="row2">
+            <div class="selectWrap" id="selectWrap">
+              <button class="selectBtn" id="selectBtn" type="button">
+                <span id="selectText"><small>Chọn người…</small></span>
+                <span>▾</span>
+              </button>
+              <div class="menu hidden" id="menu">
+                <div class="menuHead">
+                  <input id="search" placeholder="Tìm tên hoặc key…" />
+                </div>
+                <div class="menuList" id="menuList"></div>
+              </div>
+            </div>
+
+            <input id="pass" type="password" placeholder="Mật khẩu" />
+          </div>
+
+          <div class="row2">
+            <button id="btnUnlock">Mở thiệp ✨</button>
+            <button class="btnSecondary" id="btnOwnerView" type="button" disabled>Xem thiệp người này (Owner)</button>
+            <button class="btnSecondary" id="btnHint" type="button">Tip mật khẩu </button>
+          </div>
+
+          <div class="row2">
+            <button class="btnDanger hidden" id="btnLogout" type="button">Đăng xuất</button>
+          </div>
+
+          <div class="status" id="status">👉 Chọn người + nhập mật khẩu để bắt đầu.</div>
+        </div>
+      </div>
+
+      <div class="topbar">
+        <div class="badge" id="badge">🐴 Thiệp Năm Mới • Năm con ngựa 🐎</div>
+        <div class="countdown" id="countdown" aria-label="Đếm ngược đến Tết">
+          <div class="cdItem"><span class="cdVal" id="cdDays">--</span><small>ngày</small></div>
+          <div class="cdSep">:</div>
+          <div class="cdItem"><span class="cdVal" id="cdHours">--</span><small>giờ</small></div>
+          <div class="cdSep">:</div>
+          <div class="cdItem"><span class="cdVal" id="cdMins">--</span><small>phút</small></div>
+          <div class="cdSep">:</div>
+          <div class="cdItem"><span class="cdVal" id="cdSecs">--</span><small>giây</small></div>
+        </div>
+
+        <div class="actions">
+          <span class="pill">Chạm / click để bắn pháo hoa 🎆</span>
+          <select id="musicSelect" class="musicSelect" aria-label="Chọn nhạc"></select>
+          <button class="btnMusic" id="btnPrev" title="Bài trước">⏮</button>
+          <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc">
+            <span class="ico" aria-hidden="true">▶️</span><span class="txt">Phát nhạc</span>
+          </button>
+          <button class="btnMusic" id="btnNext" title="Bài tiếp">⏭</button>
+
+          <button class="btnSecondary" id="btnTetFlow" type="button" title="Nhận lộc đầu năm">🎁 Nhận lộc</button>
+
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogin" type="button">🔐 Owner Login</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogout" type="button">🔓 Owner Logout</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerDashboard" type="button">📊 Dashboard</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div>
+          <h1>Chúc Mừng Năm Mới <span class="year" id="yearText">2026</span></h1>
+          <p class="sub" id="subLine">Mở khóa xong bạn sẽ thấy lời chúc dành riêng cho bạn 🎁</p>
+
+          <div class="wishBox">
+            <p class="wish" id="wish">🔒 Thiệp đang khóa. Hãy mở thiệp để xem lời chúc.</p>
+
+            <div class="row">
+              <input id="viewerName" placeholder="Tên (tự điền sau khi mở)" disabled />
+              <input id="yearInput" maxlength="6" inputmode="numeric" placeholder="Năm (vd: 2026)" />
+              <button id="btnWish" disabled>Đổi lời chúc</button>
+            </div>
+
+            <div class="wishSend">
+              <div class="wishSendHead">💌 Bạn có muốn gửi lời chúc đến chủ sở hữu không?</div>
+              <textarea id="wishMsg" rows="3" placeholder="Bạn hãy nhập vào đây gửi lời chúc đến chủ sở hữu nhé..."></textarea>
+              <div class="row">
+                <button class="btnSecondary" id="btnSendWish" type="button" disabled>Gửi lời chúc</button>
+                <small class="muted" id="wishSendHint">* Bấm “Gửi” để lưu Firestore + gửi EmailJS (nếu đã cấu hình).</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side">
+          <div class="bubble">
+            <div class="blob" aria-hidden="true"></div>
+            <img id="avatarImg" class="avatarImg" src="./avatars/default.png" alt="Ảnh người nhận" />
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <label class="toggle">
+          <input type="checkbox" id="auto" checked />
+          Tự động bắn pháo hoa
+        </label>
+        <span>Tip: Bấm icon play mở nhạc rồi có thể chọn nhạc theo danh sách đó muốn nghe bài nào cũng được nhó. ✨</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Owner Dashboard Modal -->
+  <div id="ownerModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Owner Dashboard">
+    <div class="modalCard">
+      <div class="modalHead">
+        <div class="modalTitle">📊 Owner Dashboard</div>
+        <div class="modalBtns">
+          <button class="btnSecondary" id="btnTabViews" type="button">Lượt xem</button>
+          <button class="btnSecondary" id="btnTabWishes" type="button">Lời chúc</button>
+          <button class="btnSecondary" id="btnRefreshOwner" type="button">Làm mới</button>
+          <button class="btn" id="btnCloseOwner" type="button">Đóng</button>
+        </div>
+      </div>
+      <div id="ownerBody" class="modalBody">Đang tải...</div>
+    </div>
+  </div>
+
+  <!-- Tap audio overlay -->
+  <div id="tapAudio" class="tapAudio hidden" role="button" aria-label="Chạm để bật nhạc">
+    <div class="tapCard">
+      <div class="tapTitle">🔊 Chạm để bật nhạc</div>
+      <div class="tapSub">iPhone cần thao tác 1 lần để cho phép phát nhạc 🎶</div>
+      <div class="tapBtn">Chạm ngay ✨</div>
+    </div>
+  </div>
+
+  <!-- ✅ Success overlay -->
+  <div id="successPage" class="successPage hidden" role="dialog" aria-modal="true" aria-label="Gửi lời chúc thành công">
+    <div class="successCard">
+      <div class="successTick"><span>✅</span></div>
+      <h3 class="successTitle">Gửi lời chúc thành công!</h3>
+      <p class="successText">
+Cảm ơn bạn năm qua đã ở bên cạnh tôi nhé.
+Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
+      </p>
+      <div class="row" style="justify-content:center">
+        <button id="btnSuccessClose" type="button">Quay lại thiệp</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Tết Flow Modals -->
+  <div id="bankModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Nhập thông tin nhận lộc">
+    <div class="modalCard tetModalCard">
+      <div class="modalHead">
+        <div class="modalTitle">🏦 Nhập thông tin nhận lộc</div>
+        <div class="modalBtns">
+          <button class="btnSecondary" id="btnBankSkip" type="button">Bỏ qua</button>
+          <button class="btn" id="btnBankClose" type="button">Đóng</button>
+        </div>
+      </div>
+      <div class="modalBody">
+        <div class="tetNote">
+          <b>Lưu ý:</b> Đây là form demo UI. Mặc định <u>không gửi</u> và <u>không lưu</u> thông tin lên server.
+          Nếu bạn muốn lưu/gửi, cần tự bật và thông báo rõ cho người dùng.
+        </div>
+
+        <div class="formGrid">
+          <label class="field">
+            <span>Tên người nhận</span>
+            <input id="bankReceiver" placeholder="Tên người nhận" autocomplete="name" />
+          </label>
+
+          <label class="field">
+            <span>Tên ngân hàng</span>
+            <input id="bankName" placeholder="VD: Vietcombank / ACB / Techcombank..." autocomplete="organization" />
+          </label>
+
+          <label class="field">
+            <span>Số tài khoản</span>
+            <input id="bankAccount" placeholder="Nhập số tài khoản" inputmode="numeric" autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="row">
+          <button class="btn" id="btnBankConfirm" type="button">Xác nhận ✅</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="wheelModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Vòng quay may mắn">
+    <div class="modalCard tetModalCard">
+      <div class="modalHead">
+        <div class="modalTitle">🎡 Vòng quay may mắn</div>
+        <div class="modalBtns">
+          <button class="btnSecondary" id="btnWheelClose" type="button">Đóng</button>
+        </div>
+      </div>
+      <div class="modalBody">
+        <div class="tetNote">
+          Kết quả được chọn <b>ngẫu nhiên</b> theo tỉ lệ. (Không cài “trúng/không trúng” theo người).
+        </div>
+
+        <div class="wheelWrap">
+          <div class="wheelPointer" aria-hidden="true"></div>
+          <div class="wheel" id="wheel">
+            <div class="wheelInner" id="wheelInner"></div>
+          </div>
+        </div>
+
+        <div class="wheelActions">
+          <button class="btn" id="btnSpin" type="button">Quay 🎆</button>
+          <button class="btnSecondary" id="btnWheelNext" type="button" disabled>Tiếp tục →</button>
+        </div>
+
+        <div class="wheelResult" id="wheelResult" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="fortuneModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Lắc quẻ may mắn">
+    <div class="modalCard tetModalCard">
+      <div class="modalHead">
+        <div class="modalTitle">🧧 Lắc quẻ may mắn</div>
+        <div class="modalBtns">
+          <button class="btnSecondary" id="btnFortuneClose" type="button">Đóng</button>
+        </div>
+      </div>
+      <div class="modalBody">
+        <div class="fortuneBox" id="fortuneBox" role="button" tabindex="0" aria-label="Chạm để lắc quẻ">
+          <div class="fortuneStick" aria-hidden="true"></div>
+          <div class="fortuneStick" aria-hidden="true"></div>
+          <div class="fortuneStick" aria-hidden="true"></div>
+          <div class="fortuneTap">Chạm để lắc ✨</div>
+        </div>
+
+        <div class="fortuneResult hidden" id="fortuneResult">
+          <div class="fortuneMoney" id="fortuneMoney">0đ</div>
+          <div class="fortuneWish" id="fortuneWish"></div>
+          <div class="row">
+            <button class="btnSecondary" id="btnFortuneAgain" type="button">Lắc lại</button>
+            <button class="btn" id="btnFortuneDone" type="button">Xong ✅</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <audio id="music" preload="metadata" loop playsinline webkit-playsinline></audio>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- config + services -->
+  <script src="./config.js"></script>
+  <script type="module" src="./services.js?v=20260103"></script>
+
+  <!-- ✅ MAIN SCRIPT (module để đảm bảo chạy sau services.js) -->
+  <script type="module">
+    // ===== Year =====
+    const yearText = document.getElementById("yearText");
+    const yearInput = document.getElementById("yearInput");
+    const defaultYear = new Date().getFullYear();
+    yearText.textContent = String(defaultYear);
+    yearInput.value = String(defaultYear);
+    yearInput.addEventListener("input", () => {
+      const v = yearInput.value.replace(/[^\d]/g, "").slice(0, 4);
+      yearInput.value = v;
+      if (v) yearText.textContent = v;
+    });
+
+    // ===== Music =====
+    const music = document.getElementById("music");
+    const btnMusic = document.getElementById("btnMusic");
+    const btnPrev = document.getElementById("btnPrev");
+    const btnNext = document.getElementById("btnNext");
+    const musicSelect = document.getElementById("musicSelect");
+    const tapAudio = document.getElementById("tapAudio");
+
+    let PLAYLIST = [];
+    let trackIndex = 0;
+    let musicOn = false;
+    let userChangedTrack = false;
+
+    function setMusicButton(state, label){
+      const ico = btnMusic.querySelector(".ico");
+      const txt = btnMusic.querySelector(".txt");
+      if (label){
+        ico.textContent = "❗";
+        txt.textContent = label.replace(/^❗\s*/,'');
+        return;
+      }
+      if (state){ ico.textContent = "⏸"; txt.textContent = "Tạm dừng"; }
+      else { ico.textContent = "▶️"; txt.textContent = "Phát nhạc"; }
+    }
+
+    async function loadPlaylist(){
+      try{
+        const res = await fetch("./music/playlist.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("Cannot load music/playlist.json");
+        PLAYLIST = await res.json();
+        musicSelect.innerHTML = PLAYLIST.map((t, i) => `<option value="${i}">${t.title}</option>`).join("");
+        trackIndex = 0;
+        userChangedTrack = false;
+        setTrack(trackIndex, false);
+      }catch(e){
+        console.warn(e);
+        PLAYLIST = [];
+        musicSelect.innerHTML = `<option value="">(Không có playlist)</option>`;
+        setMusicButton(false, "❗ Chưa có nhạc");
+      }
+    }
+
+    function setTrack(i, autoplay=true){
+      if (!PLAYLIST.length) return;
+      trackIndex = (i + PLAYLIST.length) % PLAYLIST.length;
+      musicSelect.value = String(trackIndex);
+      music.src = `./music/${PLAYLIST[trackIndex].file}`;
+      music.volume = 0.9;
+      if (musicOn && autoplay) music.play().catch(()=>{});
+    }
+    function showTapOverlay(){ tapAudio.classList.remove("hidden"); }
+    function hideTapOverlay(){ tapAudio.classList.add("hidden"); }
+
+    async function tryPlayFromGesture(){
+      if (!PLAYLIST.length) return false;
+      try{
+        if (!music.src) setTrack(trackIndex, false);
+        await music.play();
+        musicOn = true;
+        setMusicButton(true);
+        hideTapOverlay();
+        return true;
+      }catch(err){
+        console.warn(err);
+        return false;
+      }
+    }
+    async function toggleMusic(){
+      if (!PLAYLIST.length){ setMusicButton(false, "❗ Chưa có nhạc"); return; }
+      if (!musicOn){
+        const ok = await tryPlayFromGesture();
+        if (!ok){ showTapOverlay(); setMusicButton(false); }
+        else { burst(innerWidth*0.5, innerHeight*0.25, 140); }
+      }else{
+        music.pause();
+        musicOn = false;
+        setMusicButton(false);
+      }
+    }
+    btnMusic.addEventListener("click", toggleMusic);
+    btnPrev.addEventListener("click", () => { userChangedTrack = true; setTrack(trackIndex - 1, true); });
+    btnNext.addEventListener("click", () => { userChangedTrack = true; setTrack(trackIndex + 1, true); });
+    musicSelect.addEventListener("change", (e) => {
+      userChangedTrack = true;
+      const i = parseInt(e.target.value, 10);
+      if (!Number.isNaN(i)) setTrack(i, true);
+    });
+    tapAudio.addEventListener("click", async () => {
+      const ok = await tryPlayFromGesture();
+      if (ok) burst(innerWidth*0.5, innerHeight*0.25, 120);
+    });
+
+    // ===== UI refs =====
+    const lock = document.getElementById("lock");
+    const statusEl = document.getElementById("status");
+    const chip = document.getElementById("chip");
+    const badge = document.getElementById("badge");
+    const subLine = document.getElementById("subLine");
+
+    const selectWrap = document.getElementById("selectWrap");
+    const selectBtn = document.getElementById("selectBtn");
+    const selectText = document.getElementById("selectText");
+    const menu = document.getElementById("menu");
+    const menuList = document.getElementById("menuList");
+    const search = document.getElementById("search");
+
+    const pass = document.getElementById("pass");
+    const btnUnlock = document.getElementById("btnUnlock");
+    const btnOwnerView = document.getElementById("btnOwnerView");
+    const btnHint = document.getElementById("btnHint");
+    const btnLogout = document.getElementById("btnLogout");
+
+    const btnOwnerLogin = document.getElementById("btnOwnerLogin");
+    const btnOwnerLogout = document.getElementById("btnOwnerLogout");
+    const btnOwnerDashboard = document.getElementById("btnOwnerDashboard");
+
+    const wishMsg = document.getElementById("wishMsg");
+    const btnSendWish = document.getElementById("btnSendWish");
+
+    const ownerModal = document.getElementById("ownerModal");
+    const ownerBody = document.getElementById("ownerBody");
+    const btnCloseOwner = document.getElementById("btnCloseOwner");
+    const btnTabViews = document.getElementById("btnTabViews");
+    const btnTabWishes = document.getElementById("btnTabWishes");
+    const btnRefreshOwner = document.getElementById("btnRefreshOwner");
+    let ownerTab = "views";
+
+    const viewerName = document.getElementById("viewerName");
+    const btnWish = document.getElementById("btnWish");
+    const wishEl = document.getElementById("wish");
+    const avatarImg = document.getElementById("avatarImg");
+
+    // ===== Global wishes =====
+    // ✅ GIỮ NGUYÊN 40 CÂU CỦA BẠN Ở ĐÂY (mình để demo vài câu)
+   const GLOBAL_WISHES = [
+  // 🇻🇳 VN + 🇺🇸 EN + 🇰🇷 KR (đã trộn lộn xộn)
+  "Chúc {name} năm {year} luôn bình an và được yêu thương thật nhiều 💖",
+  "May {year} bring you calm days and bright nights, {name}. ✨",
+  "{year}년에는 {name}님에게 행복이 가득하길 바라요 🌸",
+  "Năm {year} chúc {name} mọi điều tốt đẹp tự tìm đến! 🍀",
+  "Wishing you a year full of gentle wins, {name}. 💪",
+  "{name}님, {year}년은 웃음이 더 많아지는 한 해가 되길 😊",
+  "Chúc {name} {year} tiền vào như nước, tiền ra nhỏ giọt thôi nha 💰😄",
+  "New year, new energy—go shine, {name}! 🌟",
+  "{year}년, {name}님 꿈이 하나씩 이루어지길 🎯",
+  "Năm {year} chúc {name} sức khỏe dồi dào, tinh thần lúc nào cũng sáng! 🔋",
+  "May your {year} be full of good surprises, {name}. 🎁",
+  "{name}님, {year}년엔 좋은 사람들과 좋은 일만 가득하길 🫶",
+  "Chúc {name} {year} mọi deadline đều qua nhẹ như lông hồng ⏳🪽",
+  "In {year}, may you feel proud of yourself more often, {name}. 🌈",
+  "{year}년에도 {name}님이 원하는 길로 쭉 나아가길 🚀",
+  "Năm {year} chúc {name} đi đâu cũng gặp điều lành, về đâu cũng thấy yên 🏡✨",
+  "May {year} be kind to you, {name}. 🤍",
+  "{name}님, {year}년에는 마음이 늘 편안하길 🌿",
+  "Chúc {name} năm {year} rực rỡ theo cách của riêng mình 🌟",
+  "Wishing {name} a {year} filled with love, laughter, and peace. 🕊️",
+
+  "Năm {year} chúc {name} làm đâu thắng đó, thuận lợi đủ đường 🚀",
+  "May your hard work pay off beautifully in {year}, {name}. 📈",
+  "{year}년엔 {name}님에게 행운이 자주 찾아오길 🍀",
+  "Chúc {name} {year} cười nhiều hơn, lo ít hơn, yêu đời hơn 😊🌷",
+  "You’ve got this, {name}—make {year} your year. 💥",
+  "{name}님, {year}년엔 좋은 소식만 들리길 💌",
+  "Năm {year} chúc {name} tình cảm ấm áp, gia đình bình an 💖",
+  "May {year} bring you the right people and the right moments, {name}. 🎯",
+  "{year}년에는 {name}님 하루하루가 반짝이길 ✨",
+  "Chúc {name} {year} học gì hiểu đó, làm gì cũng tới 📚✅",
+  "Hope {year} gives you more reasons to smile, {name}. 😄",
+  "{name}님, {year}년엔 건강이 최고예요! 💪",
+  "Năm {year} chúc {name} may mắn tới tấp, niềm vui ngập tràn 🎉",
+  "May your heart feel lighter in {year}, {name}. 🌿",
+  "{year}년에도 {name}님이 사랑받는 사람인 거 잊지 마요 💗",
+  "Chúc {name} {year} công việc hanh thông, lương thưởng tăng đều 💼📈",
+  "Wishing you cozy moments and big dreams in {year}, {name}. ☕🌙",
+  "{name}님, {year}년엔 모든 일이 술술 풀리길 🌈",
+  "Năm {year} chúc {name} mỗi ngày đều có lý do để vui 😄✨",
+  "May {year} be your fresh start, {name}. 🌸",
+
+  "Chúc {name} {year} sáng tạo bùng nổ, ý tưởng ra như suối 💡🌊",
+  "May you find joy in the little things this {year}, {name}. 🌼",
+  "{name}님, {year}년엔 새로운 시작이 기분 좋게 이어지길 🌱",
+  "Năm {year} chúc {name} bình an là chính, vui vẻ là nhất 🕊️",
+  "Wishing you steady growth and soft happiness in {year}, {name}. 🌿",
+  "{year}년, {name}님에게 좋은 기회가 꼭 오길 ✨",
+  "Chúc {name} {year} gặp đúng người, đúng việc, đúng thời điểm 🎯",
+  "May your dreams feel closer in {year}, {name}. 🌙",
+  "{name}님, {year}년엔 웃는 날이 더 많아지길 😊",
+  "Năm {year} chúc {name} mọi chuyện khó rồi sẽ hóa dễ 🌈",
+  "Wishing you confidence and courage in {year}, {name}. 💪",
+  "{year}년에도 {name}님이 원하는 걸 당당히 선택하길 🌟",
+  "Chúc {name} năm {year} ngủ ngon, ăn ngon, sống chill hết nấc 🌙🍜",
+  "May {year} bring you peace of mind, {name}. 🧘",
+  "{name}님, {year}년엔 마음의 여유가 생기길 ☁️",
+  "Năm {year} chúc {name} sống nhẹ nhàng mà vẫn rực rỡ 🌸🌟",
+  "Wishing {name} a {year} full of warm memories. 📸",
+  "{year}년, {name}님에게 따뜻한 순간이 많이 남길 💛",
+  "Chúc {name} {year} luôn tự tin, mạnh mẽ và được trân trọng 💗",
+  "May {year} surprise you with happiness, {name}. 🎉"
+];
+
+    // ===== People + session =====
+    let PEOPLE = [];
+    let selectedPerson = null;
+    let lastWishIndex = -1;
+
+    let session = { loggedIn:false, viewer:null, target:null };
+    const firstWishShown = new Set();
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[m]));
+    }
+
+    function setStatus(msg, bad=false){
+      statusEl.textContent = msg;
+      statusEl.classList.toggle("bad", !!bad);
+    }
+
+    async function ensureServices(){
+      if (!window.AppServices){
+        throw new Error("AppServices chưa sẵn sàng (services.js chưa load hoặc lỗi).");
+      }
+      await window.AppServices.initFirebaseIfNeeded?.();
+    }
+
+    function isOwnerRole(){
+      return !!(session.loggedIn && session.viewer && session.viewer.role === "owner");
+    }
+    function isOwnerAuthed(){
+      try{ return window.AppServices?.isOwnerAuthed?.() === true; }
+      catch{ return false; }
+    }
+    function updateOwnerUI(){
+      const ownerRole = isOwnerRole();
+      const authed = isOwnerAuthed();
+      btnOwnerLogin.classList.toggle("hidden", !ownerRole || authed);
+      btnOwnerLogout.classList.toggle("hidden", !ownerRole || !authed);
+      btnOwnerDashboard.classList.toggle("hidden", !ownerRole || !authed);
+    }
+
+    function openOwnerModal(){
+      ownerModal.classList.remove("hidden");
+      renderOwnerTab();
+    }
+    function closeOwnerModal(){
+      ownerModal.classList.add("hidden");
+    }
+
+    function formatDuration(sec){
+      sec = Math.max(0, Number(sec||0));
+      const m = Math.floor(sec/60);
+      const s = sec%60;
+      if (m <= 0) return s + "s";
+      return m + "m " + s + "s";
+    }
+    function fmtTime(ts){
+      try{
+        if (!ts) return "";
+        if (typeof ts.toDate === "function") return ts.toDate().toLocaleString();
+        if (ts.seconds) return new Date(ts.seconds*1000).toLocaleString();
+        return new Date(ts).toLocaleString();
+      }catch{ return ""; }
+    }
+
+    async function renderOwnerTab(){
+      ownerBody.textContent = "Đang tải...";
+      try{
+        await ensureServices();
+      }catch(e){
+        ownerBody.innerHTML = `
+          <div class="ownerRow">
+            <div><b>⚠️ ${escapeHtml(e.message || "Lỗi services")}</b></div>
+            <div class="ownerMeta">Mở DevTools → Console/Network để xem services.js có lỗi/404 không.</div>
+          </div>`;
+        return;
+      }
+
+      if (!isOwnerAuthed()){
+        ownerBody.innerHTML = `
+          <div class="ownerRow">
+            <div><b>🔐 Bạn chưa đăng nhập Google Owner</b></div>
+            <div class="ownerMeta">Bấm “Owner Login” ở góc trên để đăng nhập.</div>
+          </div>
+        `;
+        return;
+      }
+
+      try{
+        if (ownerTab === "views"){
+          const list = await window.AppServices.getLatestViews(200);
+          const ownerKey = window.OWNER_KEY || "";
+          const filtered = list.filter(v => (v.ownerKey||"") === ownerKey);
+          if (!filtered.length){ ownerBody.textContent = "Chưa có lượt xem nào."; return; }
+
+          ownerBody.innerHTML = filtered.map(v => `
+            <div class="ownerRow">
+              <div class="ownerMeta">
+                <span class="pillMini">👀 ${escapeHtml(v.viewerLabel || v.viewerKey || "Ẩn danh")}</span>
+                xem thiệp: <b>${escapeHtml(v.targetLabel || v.targetKey || "")}</b>
+                • thời lượng: <b>${formatDuration(v.durationSec || 0)}</b>
+              </div>
+              <div class="ownerMeta">
+                Bắt đầu: ${escapeHtml(fmtTime(v.startedAt))}
+                • Kết thúc: ${escapeHtml(fmtTime(v.endedAt))}
+              </div>
+              <div class="ownerMeta">UA: ${escapeHtml(String(v.userAgent||"").slice(0,120))}</div>
+              <div class="row" style="justify-content:flex-end">
+                <button class="btnSecondary" type="button" data-del-view="${escapeHtml(v.id)}">🗑 Xoá</button>
+              </div>
+            </div>
+          `).join("");
+        } else {
+          const list = await window.AppServices.getLatestWishes(200);
+          const ownerKey = window.OWNER_KEY || "";
+          const filtered = list.filter(w => (w.ownerKey||"") === ownerKey);
+          if (!filtered.length){ ownerBody.textContent = "Chưa có lời chúc nào."; return; }
+
+          ownerBody.innerHTML = filtered.map(w => `
+            <div class="ownerRow">
+              <div class="ownerMeta">
+                <span class="pillMini">💌 ${escapeHtml(w.viewerLabel || w.viewerKey || "Ẩn danh")}</span>
+                gửi khi đang xem thiệp: <b>${escapeHtml(w.targetLabel || w.targetKey || "")}</b>
+                • ${escapeHtml(fmtTime(w.createdAt))}
+              </div>
+              <div style="white-space:pre-wrap">${escapeHtml(w.message || "")}</div>
+              <div class="row" style="justify-content:flex-end">
+                <button class="btnSecondary" type="button" data-del-wish="${escapeHtml(w.id)}">🗑 Xoá</button>
+              </div>
+            </div>
+          `).join("");
+        }
+      }catch(e){
+        console.warn(e);
+        ownerBody.innerHTML = `
+          <div class="ownerRow">
+            <div><b>⚠️ Không tải được dữ liệu</b></div>
+            <div class="ownerMeta">Kiểm tra Firestore Rules (read/delete owner-only) hoặc Owner chưa login.</div>
+          </div>
+        `;
+      }
+    }
+
+    // ✅ One-time event delegation for delete buttons
+    ownerBody.addEventListener("click", async (e) => {
+      const bView = e.target.closest("[data-del-view]");
+      const bWish = e.target.closest("[data-del-wish]");
+      if (!bView && !bWish) return;
+
+      if (!isOwnerAuthed()){
+        alert("Bạn chưa Owner Login.");
+        return;
+      }
+
+      const ok = confirm("Xoá dữ liệu này? Không khôi phục được.");
+      if (!ok) return;
+
+      try{
+        await ensureServices();
+        if (bView){
+          const id = bView.getAttribute("data-del-view");
+          await window.AppServices.deleteView(id);
+        } else {
+          const id = bWish.getAttribute("data-del-wish");
+          await window.AppServices.deleteWish(id);
+        }
+        await renderOwnerTab();
+      }catch(err){
+        console.warn(err);
+        alert("Xoá thất bại. Kiểm tra Firestore Rules / Owner Login.");
+      }
+    });
+
+    function randomWish(pool){
+      let idx;
+      do { idx = Math.floor(Math.random() * pool.length); }
+      while (pool.length > 1 && idx === lastWishIndex);
+      lastWishIndex = idx;
+      return pool[idx];
+    }
+
+    function getDisplayNameForTarget(t){
+      if (!t) return "bạn";
+      const override = (t.nameOverride || "").trim();
+      return override || t.label || "bạn";
+    }
+
+    function formatWish(template, displayName){
+      const name = (displayName || "bạn").trim();
+      const year = (yearInput.value || yearText.textContent || defaultYear).trim();
+      return template.replaceAll("{name}", name).replaceAll("{year}", year);
+    }
+
+    function buildWishText(template, target){
+      const name = getDisplayNameForTarget(target);
+      let text = formatWish(template, name);
+      const suffix = (target?.suffix || "").trim();
+      if (suffix) text += " " + suffix;
+      return text;
+    }
+
+    function getWishPoolForTarget(target){
+      if (!target) return GLOBAL_WISHES;
+      if (target.useGlobalRandomOnly) return GLOBAL_WISHES;
+      if (Array.isArray(target.wishes) && target.wishes.length) return target.wishes;
+      return GLOBAL_WISHES;
+    }
+
+    function showRandomWish(){
+      if (!session.loggedIn || !session.target) return;
+      const pool = getWishPoolForTarget(session.target);
+      const t = randomWish(pool);
+      wishEl.textContent = buildWishText(t, session.target);
+      burst(lastPointer.x || (innerWidth*0.5), lastPointer.y || (innerHeight*0.35), 120);
+    }
+
+    function showInitialWishIfAny(target){
+      if (!target?.firstWish) return false;
+      if (firstWishShown.has(target.key)) return false;
+      firstWishShown.add(target.key);
+      wishEl.textContent = buildWishText(target.firstWish, target);
+      return true;
+    }
+
+    function tryLoadAvatarFromCandidates(candidates){
+      let i = 0;
+      const tryNext = () => {
+        if (i >= candidates.length){ avatarImg.src = "./avatars/default.png"; return; }
+        avatarImg.onerror = tryNext;
+        avatarImg.src = candidates[i++];
+      };
+      tryNext();
+    }
+    function setAvatar(person){
+      if (!person){ avatarImg.src = "./avatars/default.png"; return; }
+      const exts = person.exts || ["jpg","png","webp","jpeg"];
+      const candidates = exts.map(ext => `./avatars/${person.key}.${ext}`);
+      tryLoadAvatarFromCandidates(candidates);
+    }
+
+    async function loadPeople(){
+      const res = await fetch("./avatars/people.json", { cache: "no-store" });
+      if (!res.ok) throw new Error("Cannot load avatars/people.json");
+      const data = await res.json();
+      if (!Array.isArray(data)) throw new Error("people.json must be an array");
+
+      PEOPLE = data.map(p => ({
+        key: String(p.key || "").trim(),
+        label: String(p.label || "").trim(),
+        pass: String(p.pass || "").trim(),
+        role: String(p.role || "guest").trim(),
+        exts: Array.isArray(p.exts) ? p.exts : ["jpg","png","webp","jpeg"],
+        wishes: Array.isArray(p.wishes) ? p.wishes : null,
+        firstWish: p.firstWish ? String(p.firstWish) : "",
+        useGlobalRandomOnly: !!p.useGlobalRandomOnly,
+        suffix: p.suffix ? String(p.suffix) : "",
+        nameOverride: p.nameOverride ? String(p.nameOverride) : ""
+      })).filter(p => p.key && p.label && p.pass);
+    }
+
+    function openMenu(){
+      menu.classList.remove("hidden");
+      search.value = "";
+      renderMenu("");
+      setTimeout(() => search.focus(), 0);
+    }
+    function closeMenu(){ menu.classList.add("hidden"); }
+
+    function renderMenu(q){
+      const query = (q || "").trim().toLowerCase();
+      const list = PEOPLE.filter(p =>
+        p.label.toLowerCase().includes(query) || p.key.toLowerCase().includes(query)
+      );
+      menuList.innerHTML = list.map(p => `
+        <div class="item" data-key="${p.key}">
+          <div class="left">
+            <div class="name">${escapeHtml(p.label)}</div>
+            <div class="meta">@${escapeHtml(p.key)}</div>
+          </div>
+          <div class="tag">${p.role === "owner" ? "OWNER" : "GUEST"}</div>
+        </div>
+      `).join("") || `
+        <div class="item">
+          <div class="left">
+            <div class="name">Không tìm thấy</div>
+            <div class="meta">Thử gõ tên hoặc key</div>
+          </div>
+        </div>`;
+    }
+
+    function pickPersonByKey(key){
+      const p = PEOPLE.find(x => x.key === key);
+      if (!p) return;
+      selectedPerson = p;
+      selectText.innerHTML = `<span>${escapeHtml(p.label)} <small>(@${escapeHtml(p.key)})</small></span>`;
+      closeMenu();
+      btnOwnerView.disabled = !(session.loggedIn && session.viewer && session.viewer.role === "owner");
+    }
+
+    selectBtn.addEventListener("click", () => {
+      if (menu.classList.contains("hidden")) openMenu();
+      else closeMenu();
+    });
+    search.addEventListener("input", () => renderMenu(search.value));
+    menuList.addEventListener("click", (e) => {
+      const item = e.target.closest(".item");
+      if (!item) return;
+      const key = item.getAttribute("data-key");
+      if (key) pickPersonByKey(key);
+    });
+    document.addEventListener("click", (e) => {
+      if (!selectWrap.contains(e.target)) closeMenu();
+    });
+
+    function lockCard(msg){
+      session = { loggedIn:false, viewer:null, target:null };
+      firstWishShown.clear();
+
+      userChangedTrack = false;
+      try{ music.pause(); }catch(e){}
+      musicOn = false;
+      setMusicButton(false);
+
+      try{ window.AppServices?.stopView?.(); }catch(e){}
+
+      lock.classList.remove("hidden");
+      chip.textContent = "Chưa mở";
+      badge.textContent = "🐴 Thiệp Năm Mới • Năm con ngựa 🐎";
+      subLine.textContent = "Mở khóa xong bạn sẽ thấy lời chúc dành riêng cho bạn 🎁";
+
+      viewerName.value = "";
+      viewerName.disabled = true;
+      btnWish.disabled = true;
+
+      btnSendWish.disabled = true;
+      wishMsg.value = "";
+      wishMsg.disabled = true;
+
+      updateOwnerUI();
+
+      wishEl.textContent = "🔒 Thiệp đang khóa. Hãy mở thiệp để xem lời chúc.";
+      avatarImg.src = "./avatars/default.png";
+
+      btnOwnerView.disabled = true;
+      btnLogout.classList.add("hidden");
+      setStatus(msg || "👉 Chọn người + nhập mật khẩu để bắt đầu.", false);
+    }
+
+    function applySessionUI(){
+      const v = session.viewer;
+      const t = session.target;
+
+      chip.textContent = v.role === "owner" ? "Đã mở • Owner" : "Đã mở";
+      badge.textContent = v.role === "owner" ? "👑 Owner Mode • Tết 2026" : "🐴 Thiệp Năm Mới • Năm con ngựa 🐎";
+
+      viewerName.value = t.label;
+      viewerName.disabled = true;
+
+      btnWish.disabled = false;
+      btnOwnerView.disabled = !(v.role === "owner" && selectedPerson);
+      btnLogout.classList.remove("hidden");
+
+      subLine.textContent = (v.role === "owner")
+        ? "👑 Owner: có thể xem thiệp người khác (không cần mật khẩu của họ)."
+        : "Chúc bạn một năm mới rực rỡ và thật bình an 🌸";
+
+      setAvatar(t);
+
+      const didShowFirst = showInitialWishIfAny(t);
+      if (!didShowFirst){
+        const pool = getWishPoolForTarget(t);
+        const template = randomWish(pool);
+        wishEl.textContent = buildWishText(template, t);
+      }
+
+      lock.classList.add("hidden");
+
+      btnSendWish.disabled = false;
+      wishMsg.disabled = false;
+
+      try{ window.AppServices?.startView?.(session.viewer, session.target); }catch(e){}
+      updateOwnerUI();
+      burst(innerWidth*0.5, innerHeight*0.28, 180);
+    }
+
+    btnUnlock.addEventListener("click", () => {
+      if (!selectedPerson){ setStatus("❌ Bạn chưa chọn người.", true); return; }
+      const pw = (pass.value || "").trim();
+      if (!pw){ setStatus("⚠️ Bạn chưa nhập mật khẩu.", true); return; }
+      if (pw !== selectedPerson.pass){
+        setAvatar(selectedPerson);
+        setStatus("❌ Sai mật khẩu. Thử lại nha!", true);
+        return;
+      }
+      session.loggedIn = true;
+      session.viewer = selectedPerson;
+      session.target = selectedPerson;
+      setStatus("✅ Mở thiệp thành công! 🎉", false);
+      applySessionUI();
+      try{ startAfterLoginExperience(); }catch(e){ console.warn(e); }
+    });
+
+    btnOwnerView.addEventListener("click", () => {
+      if (!session.loggedIn || !session.viewer || session.viewer.role !== "owner"){
+        setStatus("❌ Chỉ Owner mới dùng được.", true);
+        return;
+      }
+      if (!selectedPerson){ setStatus("⚠️ Chọn người cần xem trước đã.", true); return; }
+      session.target = selectedPerson;
+      applySessionUI();
+      try{ startAfterLoginExperience(); }catch(e){ console.warn(e); }
+    });
+
+    btnLogout.addEventListener("click", () => lockCard("👋 Đã đăng xuất."));
+
+    // Owner Login/Logout/Dashboard
+    btnOwnerLogin.addEventListener("click", async () => {
+      try{
+        await ensureServices();
+        const info = await window.AppServices.ownerGoogleLogin();
+        alert("✅ Owner Google Login OK\nUID: " + (info.uid || "") + "\nEmail: " + (info.email || ""));
+      }catch(e){
+        console.warn(e);
+        alert("❌ Owner login lỗi.\nMsg: " + (e.message || e) +
+          "\n\nNếu là unauthorized-domain: Firebase Console → Auth → Settings → Authorized domains → Add: mangniemvui.github.io");
+      }finally{
+        updateOwnerUI();
+      }
+    });
+
+    btnOwnerLogout.addEventListener("click", async () => {
+      try{ await window.AppServices.ownerGoogleLogout(); }catch(e){}
+      updateOwnerUI();
+    });
+
+    btnOwnerDashboard.addEventListener("click", () => openOwnerModal());
+    btnCloseOwner.addEventListener("click", closeOwnerModal);
+    ownerModal.addEventListener("click", (e) => { if (e.target === ownerModal) closeOwnerModal(); });
+
+    btnTabViews.addEventListener("click", () => { ownerTab = "views"; renderOwnerTab(); });
+    btnTabWishes.addEventListener("click", () => { ownerTab = "wishes"; renderOwnerTab(); });
+    btnRefreshOwner.addEventListener("click", () => renderOwnerTab());
+
+    // Success overlay
+    const successPage = document.getElementById("successPage");
+    const btnSuccessClose = document.getElementById("btnSuccessClose");
+    function showSuccessPage(){ successPage.classList.remove("hidden"); burst(innerWidth*0.5, innerHeight*0.28, 160); }
+    function hideSuccessPage(){ successPage.classList.add("hidden"); }
+    btnSuccessClose.addEventListener("click", hideSuccessPage);
+    successPage.addEventListener("click", (e) => { if (e.target === successPage) hideSuccessPage(); });
+
+    // ✅✅✅ FIXED: Send wish block đầy đủ dấu đóng
+    btnSendWish.addEventListener("click", async () => {
+      const message = (wishMsg.value || "").trim();
+      if (!message){
+        setStatus("⚠️ Bạn chưa nhập lời chúc.", true);
+        return;
+      }
+
+      try{
+        btnSendWish.disabled = true;
+        await ensureServices();
+
+        const result = await window.AppServices.sendWish({
+          viewerKey: session.viewer?.key || "",
+          viewerLabel: session.viewer?.label || "",
+          targetKey: session.target?.key || "",
+          targetLabel: session.target?.label || "",
+          message
+        });
+
+        if (result && result.savedToFirestore) {
+          wishMsg.value = "";
+          showSuccessPage();
+
+          if (result.emailed) setStatus("✅ Đã gửi email thành công! 💌", false);
+          else setStatus("✅ Đã lưu lời chúc! (Email chưa gửi được — xem Console)", false);
+        } else {
+          setStatus("❌ Gửi thất bại. Kiểm tra Firestore/Console.", true);
+        }
+      }catch(e){
+        console.warn(e);
+        setStatus("❌ Gửi thất bại. Kiểm tra Console (F12).", true);
+      }finally{
+        btnSendWish.disabled = false;
+      }
+    });
+
+    // ✅ các listener này PHẢI nằm ngoài sendWish
+    btnWish.addEventListener("click", showRandomWish);
+    btnHint.addEventListener("click", () => {
+      setStatus("Tip: Mật khẩu là  ngày tháng năm sinh dạng dd/mm/yyyy", false);
+    });
+
+    // ===== fireworks =====
+    const canvas = document.getElementById("fx");
+    const ctx = canvas.getContext("2d", { alpha: true });
+    let W = 0, H = 0, dpr = 1;
+    function resize(){
+      dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      W = Math.floor(window.innerWidth);
+      H = Math.floor(window.innerHeight);
+      canvas.width = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener("resize", resize, { passive:true });
+    resize();
+
+    const particles = [];
+    const rockets = [];
+    const gravity = 0.065;
+    const palette = [
+      [255, 122, 182],[126, 231, 255],[255, 231, 153],
+      [197, 163, 255],[170, 255, 200],[255, 255, 255]
+    ];
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+
+    function addRocket(x, y){
+      rockets.push({
+        x, y: H + 20, tx: x, ty: y,
+        vx: rand(-0.5, 0.5),
+        vy: rand(-10.2, -8.4),
+        life: 0,
+        color: palette[(Math.random()*palette.length)|0],
+      });
+    }
+    function burst(x, y, count = 90){
+      const col = palette[(Math.random()*palette.length)|0];
+      for (let i=0;i<count;i++){
+        const a = Math.random() * Math.PI * 2;
+        const sp = rand(1.1, 5.0);
+        particles.push({
+          x, y,
+          vx: Math.cos(a)*sp,
+          vy: Math.sin(a)*sp,
+          r: rand(1.2, 2.6),
+          drag: rand(0.985, 0.993),
+          alpha: 1,
+          fade: rand(0.010, 0.018),
+          col,
+          sparkle: Math.random() < 0.28
+        });
+      }
+    }
+    function drawGlow(x, y, r, col, a){
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${a})`;
+      ctx.arc(x, y, r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    function fadeFrame(){
+      ctx.fillStyle = "rgba(255,255,255,0.10)";
+      ctx.fillRect(0, 0, W, H);
+    }
+
+    let lastPointer = {x: W*0.5, y: H*0.35};
+    function pointerPos(e){
+      if (e.touches && e.touches[0]) return {x: e.touches[0].clientX, y: e.touches[0].clientY};
+      return {x: e.clientX, y: e.clientY};
+    }
+    window.addEventListener("pointerdown", (e) => {
+      const p = pointerPos(e);
+      lastPointer = p;
+      addRocket(p.x, p.y);
+    }, { passive:true });
+    window.addEventListener("touchstart", (e) => {
+      const p = pointerPos(e);
+      lastPointer = p;
+      addRocket(p.x, p.y);
+    }, { passive:true });
+
+    const autoEl = document.getElementById("auto");
+    function step(){
+      fadeFrame();
+
+      if (autoEl.checked && Math.random() < (session.loggedIn ? 0.06 : 0.035)){
+        addRocket(rand(W*0.12, W*0.88), rand(H*0.10, session.loggedIn ? H*0.55 : H*0.45));
+      }
+
+      for (let i=rockets.length-1;i>=0;i--){
+        const r = rockets[i];
+        r.life++;
+        r.x += r.vx; r.y += r.vy;
+        r.vy += gravity * 0.35;
+
+        drawGlow(r.x, r.y, 2.2, r.color, 0.60);
+        drawGlow(r.x, r.y, 7.2, r.color, 0.16);
+
+        if (r.y <= r.ty || r.vy > -2.2 || r.life > 85){
+          burst(r.x, r.y, (session.loggedIn ? 95 : 70) + ((Math.random()*60)|0));
+          rockets.splice(i, 1);
+        }
+      }
+
+      for (let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        p.vx *= p.drag; p.vy *= p.drag;
+        p.vy += gravity;
+        p.x += p.vx; p.y += p.vy;
+
+        p.alpha -= p.fade;
+        if (p.alpha <= 0 || p.y > H+40 || p.x < -40 || p.x > W+40){
+          particles.splice(i, 1);
+          continue;
+        }
+        const flick = p.sparkle ? (0.6 + Math.random()*0.7) : 1;
+        drawGlow(p.x, p.y, p.r * flick, p.col, Math.max(0, p.alpha));
+        drawGlow(p.x, p.y, p.r * 3.4, p.col, Math.max(0, p.alpha)*0.10);
+      }
+
+      requestAnimationFrame(step);
+    }
+
+
+    // ===== Tết: Countdown + Intro + Mini-game flow =====
+    const tetTarget = (() => {
+      const raw = window.TET_TARGET || "2026-02-17T00:00:00+07:00";
+      const d = new Date(raw);
+      return isNaN(d.getTime()) ? new Date("2026-02-17T00:00:00+07:00") : d;
+    })();
+
+    const cdDays = document.getElementById("cdDays");
+    const cdHours = document.getElementById("cdHours");
+    const cdMins = document.getElementById("cdMins");
+    const cdSecs = document.getElementById("cdSecs");
+
+    const introOverlay = document.getElementById("introOverlay");
+    const btnIntroClose = document.getElementById("btnIntroClose");
+    const btnIntroContinue = document.getElementById("btnIntroContinue");
+    const btnTetGame = document.getElementById("btnTetGame");
+    const introHello = document.getElementById("introHello");
+
+    const introDays = document.getElementById("introDays");
+    const introHours = document.getElementById("introHours");
+    const introMins = document.getElementById("introMins");
+    const introSecs = document.getElementById("introSecs");
+
+    const btnTetFlow = document.getElementById("btnTetFlow");
+
+    const bankModal = document.getElementById("bankModal");
+    const btnBankClose = document.getElementById("btnBankClose");
+    const btnBankSkip = document.getElementById("btnBankSkip");
+    const btnBankConfirm = document.getElementById("btnBankConfirm");
+    const bankReceiver = document.getElementById("bankReceiver");
+    const bankName = document.getElementById("bankName");
+    const bankAccount = document.getElementById("bankAccount");
+
+    const wheelModal = document.getElementById("wheelModal");
+    const btnWheelClose = document.getElementById("btnWheelClose");
+    const btnSpin = document.getElementById("btnSpin");
+    const btnWheelNext = document.getElementById("btnWheelNext");
+    const wheelInner = document.getElementById("wheelInner");
+    const wheelResult = document.getElementById("wheelResult");
+
+    const fortuneModal = document.getElementById("fortuneModal");
+    const btnFortuneClose = document.getElementById("btnFortuneClose");
+    const fortuneBox = document.getElementById("fortuneBox");
+    const fortuneResult = document.getElementById("fortuneResult");
+    const fortuneMoney = document.getElementById("fortuneMoney");
+    const fortuneWish = document.getElementById("fortuneWish");
+    const btnFortuneAgain = document.getElementById("btnFortuneAgain");
+    const btnFortuneDone = document.getElementById("btnFortuneDone");
+
+    function pad2(n){ return String(Math.max(0, n|0)).padStart(2,"0"); }
+
+    function computeCountdown(){
+      const now = new Date().getTime();
+      const diff = tetTarget.getTime() - now;
+      if (diff <= 0){
+        return { done:true, days:0, hours:0, mins:0, secs:0 };
+      }
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor(diff / (1000*60*60)) % 24;
+      const mins = Math.floor(diff / (1000*60)) % 60;
+      const secs = Math.floor(diff / 1000) % 60;
+      return { done:false, days, hours, mins, secs };
+    }
+
+    function renderCountdown(){
+      const c = computeCountdown();
+      if (cdDays){
+        cdDays.textContent = pad2(c.days);
+        cdHours.textContent = pad2(c.hours);
+        cdMins.textContent = pad2(c.mins);
+        cdSecs.textContent = pad2(c.secs);
+      }
+      if (introDays){
+        introDays.textContent = pad2(c.days);
+        introHours.textContent = pad2(c.hours);
+        introMins.textContent = pad2(c.mins);
+        introSecs.textContent = pad2(c.secs);
+      }
+    }
+
+    function startCountdown(){
+      renderCountdown();
+      setInterval(renderCountdown, 1000);
+    }
+
+    // Petals (CSS animation elements)
+    function spawnPetals(){
+      const layer = document.getElementById("petalLayer");
+      if (!layer) return;
+      layer.innerHTML = "";
+      const count = 22;
+      for (let i=0;i<count;i++){
+        const el = document.createElement("div");
+        el.className = "petal";
+        const left = Math.random()*100;
+        const dur = 7 + Math.random()*10;
+        const delay = -Math.random()*dur;
+        const size = 8 + Math.random()*10;
+        el.style.left = left + "vw";
+        el.style.animationDuration = dur + "s";
+        el.style.animationDelay = delay + "s";
+        el.style.width = size + "px";
+        el.style.height = (size*1.3) + "px";
+        el.style.opacity = String(0.55 + Math.random()*0.4);
+        layer.appendChild(el);
+      }
+    }
+
+    function openModal(el){ if (el) el.classList.remove("hidden"); }
+    function closeModal(el){ if (el) el.classList.add("hidden"); }
+
+    // Intro overlay
+    function showIntro(target){
+      if (!introOverlay) return;
+      const name = target?.label || "bạn";
+      introHello.textContent = `✨ Chào ${name} ✨`;
+      openModal(introOverlay);
+    }
+    function hideIntro(){ closeModal(introOverlay); }
+
+    btnIntroClose?.addEventListener("click", hideIntro);
+    btnIntroContinue?.addEventListener("click", hideIntro);
+
+    // Flow state
+    const tetFlow = {
+      bank: null,
+      wheelResult: null,
+      fortune: null,
+      spinning: false,
+      lastPick: null,
+    };
+
+    function resetTetFlow(){
+      tetFlow.bank = null;
+      tetFlow.wheelResult = null;
+      tetFlow.fortune = null;
+      tetFlow.spinning = false;
+      tetFlow.lastPick = null;
+      wheelResult.textContent = "";
+      btnWheelNext.disabled = true;
+      btnSpin.disabled = false;
+      fortuneResult.classList.add("hidden");
+      fortuneBox.classList.remove("shaking");
+    }
+
+    function openBankForm(){
+      resetTetFlow();
+      const t = session?.target;
+      bankReceiver.value = t?.label || "";
+      bankName.value = "";
+      bankAccount.value = "";
+      openModal(bankModal);
+    }
+
+    function openWheel(){
+      closeModal(bankModal);
+      openModal(wheelModal);
+      // reset wheel rotation
+      wheelInner.style.transition = "none";
+      wheelInner.style.transform = "rotate(0deg)";
+      // force reflow then restore transition
+      void wheelInner.offsetWidth;
+      wheelInner.style.transition = "transform 3.8s cubic-bezier(.12,.9,.14,1)";
+    }
+
+    function openFortune(){
+      closeModal(wheelModal);
+      openModal(fortuneModal);
+    }
+
+    function doneFlow(){
+      closeModal(fortuneModal);
+      const t = session?.target;
+      if (t?.key){
+        localStorage.setItem("tet_flow_done_" + t.key, "1");
+      }
+      // Small celebrate
+      try{ burst(innerWidth*0.5, innerHeight*0.32, 120); }catch(e){}
+    }
+
+    // Hook: after login success
+    function startAfterLoginExperience(){
+      const v = session?.viewer;
+      const t = session?.target;
+      if (!t) return;
+      // Đừng tự bật flow khi Owner đang xem thiệp của người khác
+      if (v?.role === "owner" && v?.key && t?.key && v.key !== t.key) return;
+
+      // Intro only once per person
+      const seenKey = "tet_intro_seen_" + t.key;
+      if (!localStorage.getItem(seenKey)){
+        showIntro(t);
+        localStorage.setItem(seenKey, "1");
+      }
+
+      // Auto start flow (bank -> wheel -> fortune) once per person, user can skip.
+      const doneKey = "tet_flow_done_" + t.key;
+      if (!localStorage.getItem(doneKey)){
+        openBankForm();
+      }
+    }
+
+    // Topbar shortcut to rerun flow
+    btnTetFlow?.addEventListener("click", () => {
+      if (!session?.loggedIn){
+        alert("Bạn cần mở thiệp trước đã 😊");
+        return;
+      }
+      openBankForm();
+    });
+    btnTetGame?.addEventListener("click", () => {
+      if (!session?.loggedIn){
+        alert("Bạn cần mở thiệp trước đã 😊");
+        return;
+      }
+      hideIntro();
+      openBankForm();
+    });
+
+    btnBankClose?.addEventListener("click", () => closeModal(bankModal));
+    btnBankSkip?.addEventListener("click", () => {
+      closeModal(bankModal);
+      // nếu bỏ qua thì coi như không tham gia vòng quay, chuyển thẳng qua quẻ
+      openFortune();
+    });
+    btnBankConfirm?.addEventListener("click", () => {
+      const receiver = (bankReceiver.value || "").trim();
+      const bank = (bankName.value || "").trim();
+      const acc = (bankAccount.value || "").trim();
+
+      if (!receiver){ alert("Bạn vui lòng nhập tên người nhận."); return; }
+      if (!bank){ alert("Bạn vui lòng nhập tên ngân hàng."); return; }
+      if (!acc || acc.length < 6){ alert("Số tài khoản chưa đúng (tối thiểu 6 ký tự)."); return; }
+
+      // Demo: chỉ lưu trong session RAM
+      tetFlow.bank = { receiver, bank, acc };
+      openWheel();
+    });
+
+    btnWheelClose?.addEventListener("click", () => closeModal(wheelModal));
+
+    // Lucky wheel logic (honest random)
+    // Segments: Bracelet, Ring, No prize. (2 gifts + 1 "chưa trúng")
+    const wheelSegments = [
+      { key:"bracelet", label:"Vòng tay Pandora", weight: 2,  angleFrom: 0,   angleTo: 50  },  // small slice
+      { key:"ring",     label:"Nhẫn Pandora",     weight: 18, angleFrom: 50,  angleTo: 170 }, // medium slice
+      { key:"none",     label:"Chúc may mắn",     weight: 80, angleFrom: 170, angleTo: 360 }  // large slice
+    ];
+
+    function weightedPick(segments){
+      const total = segments.reduce((s,x)=>s+x.weight,0);
+      let r = Math.random()*total;
+      for (const s of segments){
+        r -= s.weight;
+        if (r <= 0) return s;
+      }
+      return segments[segments.length-1];
+    }
+
+    function spinToSegment(seg){
+      // spin many rounds + land at random angle inside segment
+      const base = 360 * (5 + Math.floor(Math.random()*3)); // 5-7 turns
+      const mid = seg.angleFrom + (seg.angleTo - seg.angleFrom) * (0.35 + Math.random()*0.3);
+      const targetDeg = base + (360 - mid); // because pointer at top (0deg)
+      wheelInner.style.transform = `rotate(${targetDeg}deg)`;
+      return targetDeg;
+    }
+
+    function setWheelResult(seg){
+      tetFlow.wheelResult = seg;
+      btnWheelNext.disabled = false;
+      const t = session?.target;
+      const name = t?.label || "bạn";
+      if (seg.key === "none"){
+        wheelResult.innerHTML = `😅 ${escapeHtml(name)} chưa trúng quà ở vòng quay. Mình qua <b>lắc quẻ</b> nha!`;
+      } else {
+        wheelResult.innerHTML = `🎉 Chúc mừng ${escapeHtml(name)}! Bạn nhận được: <b>${escapeHtml(seg.label)}</b> ✨`;
+      }
+    }
+
+    btnSpin?.addEventListener("click", () => {
+      if (tetFlow.spinning) return;
+      tetFlow.spinning = true;
+      btnSpin.disabled = true;
+      btnWheelNext.disabled = true;
+      wheelResult.textContent = "Đang quay… 🎆";
+
+      const pick = weightedPick(wheelSegments);
+      tetFlow.lastPick = pick;
+      spinToSegment(pick);
+    });
+
+    wheelInner?.addEventListener("transitionend", () => {
+      if (!tetFlow.spinning) return;
+      tetFlow.spinning = false;
+      setWheelResult(tetFlow.lastPick || wheelSegments[2]);
+      // celebrate a bit
+      try{ burst(innerWidth*0.5, innerHeight*0.28, 80); }catch(e){}
+    });
+
+    btnWheelNext?.addEventListener("click", () => {
+      const seg = tetFlow.wheelResult;
+      if (!seg) return;
+      if (seg.key === "none"){
+        openFortune();
+      } else {
+        // If won a gift, allow finishing without fortune
+        closeModal(wheelModal);
+        localStorage.setItem("tet_flow_done_" + (session?.target?.key || "x"), "1");
+        showSuccessCard(`🎁 ${seg.label}\n\nNếu đây là chương trình tặng quà thật, hãy liên hệ chủ sở hữu để nhận quà nhé!`);
+      }
+    });
+
+    btnFortuneClose?.addEventListener("click", () => closeModal(fortuneModal));
+
+    const fortunePool = [
+      { money: 50000,  wish:"🌸 Năm mới tới, chúc bạn bình an – vui vẻ – mọi điều hanh thông." },
+      { money: 50000,  wish:"🧧 Chúc bạn năm 2026 sức khỏe dồi dào, công việc thuận lợi, tiền vào như nước." },
+      { money: 50000,  wish:"✨ Tân niên rực rỡ, chúc bạn gặp đúng người – đúng thời – đúng cơ hội." },
+      { money: 50000,  wish:"💫 Năm mới bớt lo âu, thêm tiếng cười, thêm may mắn mỗi ngày." },
+
+      { money: 100000, wish:"🎆 Lộc đến cửa, chúc bạn bứt phá mục tiêu và luôn được yêu thương." },
+      { money: 100000, wish:"🌟 Chúc bạn năm mới thăng tiến, học gì cũng vào, làm gì cũng thành." },
+
+      { money: 150000, wish:"🏮 Vạn sự như ý, quý nhân phù trợ, tài lộc gõ cửa liên hồi." },
+      { money: 150000, wish:"🍀 Chúc bạn năm mới phát tài phát lộc, cơ hội nở rộ như hoa xuân." },
+
+      { money: 200000, wish:"👑 Quẻ đại cát: một năm bội thu, tình tiền đều đủ, mọi điều tròn đầy!" }
+    ];
+
+    function formatVND(n){
+      try{
+        return new Intl.NumberFormat("vi-VN", { style:"currency", currency:"VND" }).format(n);
+      }catch(e){
+        return n + "đ";
+      }
+    }
+
+    function pickFortuneUnique(){
+      // avoid repeating same wish in this session if possible
+      const used = JSON.parse(sessionStorage.getItem("tet_used_fortunes") || "[]");
+      const candidates = fortunePool.filter(f => !used.includes(f.wish));
+      const list = candidates.length ? candidates : fortunePool;
+      const pick = list[Math.floor(Math.random()*list.length)];
+      used.push(pick.wish);
+      sessionStorage.setItem("tet_used_fortunes", JSON.stringify(used.slice(-30)));
+      return pick;
+    }
+
+    function revealFortune(){
+      fortuneBox.classList.add("shaking");
+      fortuneResult.classList.add("hidden");
+      setTimeout(() => {
+        fortuneBox.classList.remove("shaking");
+        const f = pickFortuneUnique();
+        tetFlow.fortune = f;
+        fortuneMoney.textContent = formatVND(f.money);
+        fortuneWish.textContent = f.wish;
+        fortuneResult.classList.remove("hidden");
+        try{ burst(innerWidth*0.5, innerHeight*0.35, 95); }catch(e){}
+      }, 900);
+    }
+
+    fortuneBox?.addEventListener("click", revealFortune);
+    fortuneBox?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        revealFortune();
+      }
+    });
+
+    btnFortuneAgain?.addEventListener("click", revealFortune);
+    btnFortuneDone?.addEventListener("click", doneFlow);
+
+
+    // ===== init =====
+    (async function init(){
+      try{
+        await loadPeople();
+        renderMenu("");
+        if (PEOPLE.length){
+          selectedPerson = PEOPLE[0];
+          selectText.innerHTML = `<span>${escapeHtml(selectedPerson.label)} <small>(@${escapeHtml(selectedPerson.key)})</small></span>`;
+        }
+        lockCard("👉 Chọn người + nhập mật khẩu để bắt đầu.");
+      }catch(err){
+        console.warn(err);
+        lockCard("⚠️ Không tải được people.json. Kiểm tra: avatars/people.json");
+      }
+
+      await loadPlaylist();
+
+      try{ startCountdown(); }catch(e){}
+      try{ spawnPetals(); }catch(e){}
+
+      ctx.clearRect(0,0,W,H);
+      step();
+      setTimeout(() => burst(W*0.5, H*0.28, 90), 350);
+      try{ updateOwnerUI(); }catch(e){}
+    })();
+  </script>
+</body>
+</html>

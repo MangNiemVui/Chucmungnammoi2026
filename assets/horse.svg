@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Ngựa 2026">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff2c2"/>
+      <stop offset="0.35" stop-color="#ffd36a"/>
+      <stop offset="0.7" stop-color="#f0b837"/>
+      <stop offset="1" stop-color="#fff2c2"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- subtle clouds -->
+  <g opacity="0.18">
+    <path d="M90 350c35-38 92-32 118-6 18-31 67-43 101-14 40-16 94 8 96 48 47-12 98 24 96 64H80c-22-34-10-71 10-92z" fill="#fff"/>
+    <path d="M475 250c25-28 64-24 82-4 13-23 47-32 71-10 28-11 65 6 67 36 33-9 69 18 67 48H445c-16-24-7-51 7-70z" fill="#fff"/>
+  </g>
+
+  <!-- horse silhouette: stylized line-art -->
+  <g fill="none" stroke="url(#gold)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <!-- body -->
+    <path d="M315 360c-10-60 28-124 88-154 44-22 104-20 150 6 34 19 55 51 60 89 6 48-7 94-35 129"/>
+    <!-- neck + head -->
+    <path d="M420 210c-18-34-30-66-22-101 6-25 24-43 51-52 22-8 45-3 60 12"/>
+    <path d="M507 69c18 10 32 30 37 54 5 27-1 58-19 88"/>
+    <!-- ear + face -->
+    <path d="M506 78l10-34"/>
+    <path d="M520 86l22-26"/>
+    <path d="M543 158c18 6 32 2 45-9"/>
+    <!-- mane -->
+    <path d="M458 106c-18 18-32 41-38 70"/>
+    <path d="M430 96c-22 20-41 50-50 86"/>
+    <path d="M403 104c-30 23-53 60-63 103"/>
+    <!-- legs -->
+    <path d="M355 342c-34 33-55 71-62 115"/>
+    <path d="M405 372c-26 37-41 67-50 105"/>
+    <path d="M530 375c20 30 37 58 48 98"/>
+    <path d="M600 340c38 34 63 69 76 112"/>
+    <!-- tail -->
+    <path d="M650 328c48 30 74 61 84 99"/>
+  </g>
+
+  <!-- 2026 badge -->
+  <g transform="translate(70 55)">
+    <rect x="0" y="0" width="190" height="74" rx="18" fill="rgba(0,0,0,.18)" stroke="rgba(255,210,90,.35)"/>
+    <text x="95" y="52" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-weight="900" font-size="40" fill="url(#gold)">2026</text>
+  </g>
+</svg>
